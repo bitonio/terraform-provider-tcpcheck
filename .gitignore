@@ -1,0 +1,23 @@
+# Terraform Healthcheck Provider
+
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+*.tfplan
+
+# Go build artifacts
+provider/terraform-provider-healthcheck
+provider/terraform-provider-tcpcheck
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Go test files
+*.test
+*.out
+
+# Go vendor
+provider/vendor/
