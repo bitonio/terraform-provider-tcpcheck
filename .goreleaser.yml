@@ -3,9 +3,10 @@ version: 2
 before:
   hooks:
     - go mod tidy
+
 builds:
-  - mod_dir: provider        # Tell GoReleaser to run 'go' commands inside /provider
-    main: ./main.go          # Path relative to mod_dir
+  - dir: provider        # Tell GoReleaser to run 'go' commands inside /provider
+    main: ./main.go      # Path relative to dir
     env:
       - CGO_ENABLED=0
     goos:
@@ -21,12 +22,15 @@ builds:
     ignore:
       - goos: darwin
         goarch: '386'
+
 archives:
   - format: zip
     name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
+
 checksum:
   name_template: '{{ .ProjectName }}_{{ .Version }}_SHA256SUMS'
   algorithm: sha256
+
 signs:
   - artifacts: checksum
     args:
@@ -37,6 +41,7 @@ signs:
       - "${signature}"
       - "--detach-sign"
       - "${artifact}"
+
 release:
   extra_files:
     - glob: '../terraform-registry-manifest.json'
